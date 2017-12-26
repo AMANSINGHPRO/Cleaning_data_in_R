@@ -1,0 +1,92 @@
+---
+title: "Cleaning"
+author: "Aman"
+date: "12/26/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+weather <- readRDS("/Users/aaman10/Downloads/weather.rds")
+weather
+```
+
+```{r}
+# View the first 6 rows of data
+head(weather)
+
+# View the last 6 rows of data
+tail(weather)
+
+# View a condensed summary of the data
+str(weather)
+```
+
+
+```{r}
+# Check the class of bmi
+class(bmi)
+
+# Check the dimensions of bmi
+dim(bmi)
+
+# View the column names of bmi
+names(bmi)
+```
+
+
+```{r}
+# Check the structure of bmi
+str(bmi)
+
+# Load dplyr
+library(dplyr)
+
+# Check the structure of bmi, the dplyr way
+glimpse(bmi)
+
+# View a summary of bmi
+summary(bmi)
+```
+
+
+```{r}
+# Print bmi to the console
+bmi
+
+# View the first 6 rows
+head(bmi)
+
+# View the first 15 rows
+head(bmi, n = 15)
+
+# View the last 6 rows
+tail(bmi)
+
+# View the last 10 rows
+tail(bmi, n = 10)
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
