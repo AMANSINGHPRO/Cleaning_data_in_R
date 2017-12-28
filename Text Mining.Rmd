@@ -593,6 +593,51 @@ wordcloud(bi_words, freq, max.words = 15)
 
 
 ```{r}
+# Create tf_tdm
+tf_tdm <- TermDocumentMatrix(text_corp)
+
+# Create tfidf_tdm
+tfidf_tdm <- TermDocumentMatrix(text_corp, control = list(weighting = weightTfIdf))
+
+# Create tf_tdm_m
+tf_tdm_m <- as.matrix(tf_tdm)
+
+# Create tfidf_tdm_m 
+tfidf_tdm_m <- as.matrix(tfidf_tdm)
+
+# Examine part of tf_tdm_m
+tf_tdm_m[508:509, 5:10]
+
+# Examine part of tfidf_tdm_m
+tfidf_tdm_m[508:509, 5:10]
+```
+
+
+```{r}
+# Add author to custom reading list
+custom_reader <- readTabular(mapping = list(content = "text", 
+                                            id = "num",
+                                            author = "screenName",
+                                            date = "created"
+                                            ))
+
+# Make corpus with custom reading
+text_corpus <- VCorpus(DataframeSource(tweets), 
+  readerControl = list(reader = custom_reader)
+)
+
+# Clean corpus
+text_corpus <- clean_corpus(text_corpus)
+
+# Print data
+text_corpus[[1]][1]
+
+# Print metadata
+text_corpus[[1]][2]
+```
+
+
+```{r}
 
 ```
 
