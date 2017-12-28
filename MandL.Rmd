@@ -43,3 +43,60 @@ data_space +
 lm(bwt ~ age + parity, data = babies)
 ```
 
+
+```{r}
+# R^2 and adjusted R^2
+summary(mod)
+
+# add random noise
+mario_kart_noisy <- mario_kart %>%
+  mutate(noise = rnorm(nrow(mario_kart)))
+  
+# compute new model
+mod2 <- lm(totalPr ~ wheels + cond + noise, data = mario_kart_noisy)
+
+# new R^2 and adjusted R^2
+summary(mod2)
+```
+
+
+```{r}
+# return a vector
+predict(mod)
+
+# return a data frame
+augment(mod)
+```
+
+
+```{r}
+# include interaction
+lm(totalPr ~ cond + duration + cond:duration, data = mario_kart)
+```
+
+
+```{r}
+# interaction plot
+ggplot(mario_kart, aes(duration, totalPr, color = cond)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+```{r}
+slr <- ggplot(mario_kart, aes(y = totalPr, x = duration)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = 0)
+
+# model with one slope
+lm(totalPr ~ duration, data = mario_kart)
+
+# plot with two slopes
+slr + aes(color = cond)
+```
+
+
+```{r}
+
+```
+
