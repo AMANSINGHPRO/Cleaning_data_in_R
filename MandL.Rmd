@@ -262,6 +262,38 @@ lm(Price ~ Food, data = nyc)
 
 
 ```{r}
+# fit model
+lm(Price ~ Food + Service, data = nyc)
+
+# draw 3D scatterplot
+p <- plot_ly(data = nyc, z = ~Price, x = ~Food, y = ~Service, opacity = 0.6) %>%
+  add_markers() 
+
+# draw a plane
+p %>%
+  add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE) 
+```
+
+
+```{r}
+# Price by Food and Service and East
+lm(Price ~ Food + Service + East, data = nyc)
+```
+
+
+```{r}
+# draw 3D scatterplot
+p <- plot_ly(data = nyc, z = ~Price, x = ~Food, y = ~Service, opacity = 0.6) %>%
+  add_markers(color = ~factor(East)) 
+
+# draw two planes
+p %>%
+  add_surface(x = ~x, y = ~y, z = ~plane0, showscale = FALSE) %>%
+  add_surface(x = ~x, y = ~y, z = ~plane1, showscale = FALSE)
+```
+
+
+```{r}
 
 ```
 
