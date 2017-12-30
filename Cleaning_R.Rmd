@@ -16,8 +16,15 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
-weather <- readRDS("/Users/aaman10/Downloads/weather.rds")
+weather <- readRDS("weather.rds")
 weather
+
+bmi_dataset <- read.csv(url("https://assets.datacamp.com/production/course_723/datasets/bmi_clean.csv"))
+
+census_dataset <- read.csv(url("https://assets.datacamp.com/production/course_723/datasets/census-retail.csv"))
+
+students_dataset <- read.csv(url("https://assets.datacamp.com/production/course_723/datasets/students_with_dates.csv"))
+
 ```
 
 ```{r}
