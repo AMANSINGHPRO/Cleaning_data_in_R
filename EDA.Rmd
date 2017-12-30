@@ -16,6 +16,19 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r, eval = F}
+cars_dataset <- read.csv(url("https://assets.datacamp.com/production/course_1796/datasets/cars04.csv"))
+
+comics_dataset <- read.csv(url("https://assets.datacamp.com/production/course_1796/datasets/comics.csv"))
+
+immigration_dataset <- read.csv(url("https://assets.datacamp.com/production/course_1796/datasets/immigration.csv"))
+
+lifeExpectancy_dataset <- read.csv(url("https://assets.datacamp.com/production/course_1796/datasets/life_exp_raw.csv"))
+
+names_dataset <- read.delim("https://assets.datacamp.com/production/course_1796/datasets/names.txt")
+
+income_dataset <- read.csv(url("https://assets.datacamp.com/production/course_1796/datasets/us_income_raw.csv"))
+
+
 # Print the first rows of the data
 comics
 
@@ -108,6 +121,115 @@ pies$flavor <- factor(pies$flavor, levels = lev)
 ggplot(pies, aes(x = flavor)) + 
   geom_bar(fill = "chartreuse") + 
   theme(axis.text.x = element_text(angle = 90))
+```
+
+
+```{r}
+# Load package
+library(ggplot2)
+
+# Learn data structure
+str(cars)
+
+# Create faceted histogram
+ggplot(cars, aes(x = city_mpg)) +
+  geom_histogram() +
+  facet_wrap(~ suv)
+```
+
+
+```{r}
+# Filter cars with 4, 6, 8 cylinders
+common_cyl <- cars %>%
+  filter(ncyl %in% c(4, 6, 8))
+
+# Create box plots of city mpg by ncyl
+ggplot(common_cyl, aes(x = as.factor(ncyl), y = city_mpg)) +
+  geom_boxplot()
+
+# Create overlaid density plots for same data
+ggplot(common_cyl, aes(x = city_mpg, fill = as.factor(ncyl))) +
+  geom_density(alpha = .3)
+```
+
+
+```{r}
+# Create hist of horsepwr
+cars %>%
+  ggplot(aes(horsepwr)) +
+  geom_histogram() +
+  ggtitle("TT")
+
+# Create hist of horsepwr for affordable cars
+cars %>% 
+  filter(msrp < 25000) %>%
+  ggplot(aes(horsepwr)) +
+  geom_histogram() +
+  xlim(c(90, 550)) +
+  ggtitle("T2")
+```
+
+
+```{r}
+# Create hist of horsepwr with binwidth of 3
+cars %>%
+  ggplot(aes(horsepwr)) +
+  geom_histogram(binwidth = 3) +
+  ggtitle("TT")
+
+# Create hist of horsepwr with binwidth of 30
+cars %>%
+  ggplot(aes(horsepwr)) +
+  geom_histogram(binwidth = 30) +
+  ggtitle("TT")
+
+
+# Create hist of horsepwr with binwidth of 60
+cars %>%
+  ggplot(aes(horsepwr)) +
+  geom_histogram(binwidth = 60) +
+  ggtitle("TT")
+
+```
+
+
+```{r}
+# Construct box plot of msrp
+cars %>%
+  ggplot(aes(x = 1, y = msrp)) +
+  geom_boxplot()
+
+# Exclude outliers from data
+cars_no_out <- cars %>%
+  filter(msrp < 100000)
+
+# Construct box plot of msrp using the reduced dataset
+cars_no_out %>%
+  ggplot(aes(x = 1, y = msrp)) +
+  geom_boxplot()
+```
+
+
+```{r}
+# Create plot of city_mpg
+cars %>%
+  ggplot(aes(x = 1, y = city_mpg)) +
+  geom_boxplot()
+
+# Create plot of width
+cars %>% 
+  ggplot(aes(x = width)) +
+  geom_density()
+```
+
+
+```{r}
+# Facet hists using hwy mileage and ncyl
+common_cyl %>%
+  ggplot(aes(x = hwy_mpg)) +
+  geom_histogram() +
+  facet_grid(ncyl ~ suv) +
+  ggtitle("TT")
 ```
 
 
