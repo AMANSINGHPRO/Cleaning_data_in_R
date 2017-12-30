@@ -312,6 +312,96 @@ gap_asia %>%
 
 
 ```{r}
+# Load packages
+library(openintro)
+library(ggplot2)
+library(dplyr)
+
+# Compute summary statistics
+email %>%
+  group_by(spam) %>%
+  summarize(median(num_char),
+            IQR(num_char))
+
+# Create plot
+email %>%
+  mutate(log_num_char = log(num_char)) %>%
+  ggplot(aes(x = spam, y = log_num_char)) +
+  geom_boxplot()
+```
+
+
+```{r}
+# Compute center and spread for exclaim_mess by spam
+email %>%
+  group_by(spam) %>%
+  summarize(median(exclaim_mess),
+            IQR(exclaim_mess))
+
+# Create plot for spam and exclaim_mess
+email %>%
+  mutate(log_exclaim_mess = log(exclaim_mess + .01)) %>%
+  ggplot(aes(x = log_exclaim_mess)) +
+  geom_histogram() +
+  facet_wrap(~ spam)
+
+# Alternative plot: side-by-side box plots
+email %>%
+  mutate(log_exclaim_mess = log(exclaim_mess + .01)) %>%
+  ggplot(aes(x = 1, y = log_exclaim_mess)) +
+  geom_boxplot() +
+  facet_wrap(~ spam)
+
+# Alternative plot: Overlaid density plots
+email %>%
+  mutate(log_exclaim_mess = log(exclaim_mess + .01)) %>%
+  ggplot(aes(x = log_exclaim_mess, fill = spam)) +
+  geom_density(alpha = 0.3)
+```
+
+
+```{r}
+# Create plot of proportion of spam by image
+email %>%
+  mutate(has_image = image > 0) %>%
+  ggplot(aes(x = has_image, fill = spam)) +
+  geom_bar(position = "fill")
+```
+
+
+```{r}
+# Test if images count as attachments
+sum(email$image > email$attach)
+```
+
+
+```{r}
+# Question 1
+email %>%
+  filter(dollar > 0) %>%
+  group_by(spam) %>%
+  summarize(median(dollar))
+
+# Question 2
+email %>%
+  filter(dollar > 10) %>%
+  ggplot(aes(x = spam)) +
+  geom_bar()
+```
+
+
+```{r}
+# Reorder levels
+email$number <- factor(email$number, levels = c("none", "small", "big"))
+
+# Construct plot of number
+ggplot(email, aes(x = number)) +
+  geom_bar() +
+  facet_wrap(~ spam)
+```
+
+
+```{r}
 
 ```
 
