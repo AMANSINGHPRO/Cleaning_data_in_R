@@ -19,6 +19,13 @@ When you click the **Knit** button a document will be generated that includes bo
 # Load qdap
 library(qdap)
 
+coffee_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/coffee.csv"))
+
+chardonnay_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/chardonnay.csv"))
+
+amazon_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/500_amzn.csv"))
+
+google_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/500_goog.csv"))
 # Print new_text to the console
 new_text
 
