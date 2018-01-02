@@ -26,6 +26,10 @@ chardonnay_dataset <- read.csv(url("https://assets.datacamp.com/production/cours
 amazon_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/500_amzn.csv"))
 
 google_dataset <- read.csv(url("https://assets.datacamp.com/production/course_935/datasets/500_goog.csv"))
+
+new_text <- "DataCamp is the first online learning platform that focuses on building the best learning experience specifically for Data Science. We have offices in Boston and Belgium and to date, we trained over 250,000 (aspiring) data scientists in over 150 countries. These data science enthusiasts completed more than 9 million exercises. You can take free beginner courses, or subscribe for $25/month to get access to all premium courses."
+
+
 # Print new_text to the console
 new_text
 
